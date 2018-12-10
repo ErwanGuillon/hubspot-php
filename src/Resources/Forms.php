@@ -27,6 +27,28 @@ class Forms extends Resource
     }
 
     /**
+     * Submit data to a form V3.
+     *
+     * @see https://developers.hubspot.com/docs/methods/forms/submit_form_v3
+     *
+     * Send form submission data to HubSpot. Form submissions from external sources can be made to any registered
+     * HubSpot form. You can see a list of forms on your portal by going to the Contacts > Forms page
+     *
+     * @param int    $portal_id
+     * @param string $form_guid
+     * @param array  $form_data
+     * @return \SevenShores\Hubspot\Http\Response
+     */
+    function submitV3($portal_id, $form_guid, $form_data)
+    {
+        $endpoint = "https://api.hsforms.com/submissions/v3/integration/submit/{$portal_id}/{$form_guid}";
+
+        $options['form_params'] = $form_data;
+
+        return $this->client->request('post', $endpoint, $options, null, false);
+    }
+
+    /**
      * Return all forms that have been created in the portal.
      *
      * @see http://developers.hubspot.com/docs/methods/forms/v2/get_forms
