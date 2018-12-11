@@ -36,14 +36,14 @@ class Forms extends Resource
      *
      * @param int    $portal_id
      * @param string $form_guid
-     * @param array  $form_data
+     * @param array  $json_data
      * @return \SevenShores\Hubspot\Http\Response
      */
-    function submitV3($portal_id, $form_guid, $form_data)
+    function submitV3($portal_id, $form_guid, $json_data)
     {
         $endpoint = "https://api.hsforms.com/submissions/v3/integration/submit/{$portal_id}/{$form_guid}";
 
-        $options['form_params'] = $form_data;
+        $options['json'] = $json_data;
 
         return $this->client->request('post', $endpoint, $options, null, false);
     }
